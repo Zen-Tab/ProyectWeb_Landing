@@ -106,30 +106,57 @@
 	    	$(".mobile-menu").slideToggle();
 	    });
 
-	    if( $(".map").length ){
-			$('.map').gmap3({
-				map: {
-					options: {
-						center: [-11.1095, -77.6019],
-						zoom: 16,
-						maxZoom: 14,
-						scrollwheel: false
-					}  
-				},
-				marker:{
-					latLng: [-11.1095, -77.6019],
-					options: {
-						title: "Takibatú - Huacho, Peru"
-					}
-				}
-			},
-			"autofit" );
-	    }
-
 	});
 
-	$(window).ready(function(){
+	// Inicializar mapa con Leaflet
+	function inicializarMapa() {
+		if($(".map").length && typeof L !== 'undefined') {
+			try {
+				// Destruir mapa anterior si existe
+				if(window.mapaInstance) {
+					window.mapaInstance.remove();
+				}
+				
+				// Crear mapa nuevo
+				window.mapaInstance = L.map('.map').setView([-11.1095, -77.6019], 16);
+				
+				// Agregar tiles
+				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					attribution: '© OpenStreetMap contributors',
+					maxZoom: 19
+				}).addTo(window.mapaInstance);
+				
+				// Agregar marcador
+				L.marker([-11.1095, -77.6019]).addTo(window.mapaInstance)
+					.bindPopup('<strong>Takibatú</strong><br>Huacho, Perú')
+					.openPopup();
+				
+				// Ajustar tamaño
+				window.mapaInstance.invalidateSize();
+				console.log('✅ Mapa inicializado correctamente');
+			} catch(e) {
+				console.error('❌ Error al inicializar mapa:', e);
+			}
+		}
+	}
 
+	// Detectar cuando Leaflet esté disponible
+	if(typeof L !== 'undefined') {
+		// Leaflet ya está cargado
+		$(document).ready(inicializarMapa);
+	} else {
+		// Esperar a que Leaflet cargue
+		var checkLeaflet = setInterval(function() {
+			if(typeof L !== 'undefined') {
+				clearInterval(checkLeaflet);
+				$(document).ready(inicializarMapa);
+			}
+		}, 100);
+	}
+
+	// También intentar cuando window loading complete
+	$(window).on('load', function(){
+		setTimeout(inicializarMapa, 1000);
 	});
 
 })(jQuery, document, window);

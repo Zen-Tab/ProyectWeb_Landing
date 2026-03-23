@@ -2020,8 +2020,17 @@ body {
     text-decoration: none; }
 
 /* line 138, sass/layout/_content.scss */
+.map-wrapper {
+  margin-bottom: 20px;
+  overflow: visible;
+  border: 1px solid #ddd; }
+
 .map {
-  height: 320px; }
+  width: 100% !important;
+  height: 400px !important;
+  background: #e0e0e0 !important;
+  position: relative;
+  z-index: 10; }
 
 /* line 142, sass/layout/_content.scss */
 .contact-form {

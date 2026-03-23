@@ -110,12 +110,17 @@
 			$('.map').gmap3({
 				map: {
 					options: {
+						center: [-11.1095, -77.6019],
+						zoom: 16,
 						maxZoom: 14,
 						scrollwheel: false
 					}  
 				},
 				marker:{
-					address: "40 Sibley St, Detroit",
+					latLng: [-11.1095, -77.6019],
+					options: {
+						title: "Takibatú - Huacho, Peru"
+					}
 				}
 			},
 			"autofit" );

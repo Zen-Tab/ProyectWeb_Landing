@@ -2207,6 +2207,16 @@ body {
         background: linear-gradient(0, #4f4f4f, #4f4f4f) top left, linear-gradient(0, #4f4f4f, #4f4f4f) top right, linear-gradient(315deg, transparent 5px, #4f4f4f 0) bottom right, linear-gradient(0, #4f4f4f, #4f4f4f) bottom left;
         background-size: 55% 55%;
         background-repeat: no-repeat; }
+        .site-footer .social-links a:hover i {
+          color: #ff6b6b; }
+        .site-footer .social-links a.facebook:hover i {
+          color: #1877F2; }
+        .site-footer .social-links a.instagram:hover i {
+          color: #E1306C; }
+        .site-footer .social-links a.tiktok:hover i {
+          color: #010101; }
+        .site-footer .social-links a.youtube:hover i {
+          color: #FF0000; }
   /* line 72, sass/layout/_footer.scss */
   .site-footer .copy {
     color: #434343;
